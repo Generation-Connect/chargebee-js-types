@@ -14,17 +14,17 @@ import {
   Layout,
 } from './enums';
 
-declare var Chargebee: {
+export type Chargebee = {
   init(op: InitOptions): void;
   getInstance(): ChargebeeInstance;
 };
 
-type InitOptions = {
+export type InitOptions = {
   site: string;
   publishableKey: string;
 };
 
-type OpenCheckoutOptions = {
+export type OpenCheckoutOptions = {
   hostedPage: Function;
   layout: Layout;
   loaded: Function;
@@ -49,9 +49,9 @@ interface AddressDetails {
   zip?: string;
 }
 
-type BillingAddress = AddressDetails;
+export type BillingAddress = AddressDetails;
 
-type ShippingAddress = AddressDetails;
+export type ShippingAddress = AddressDetails;
 
 interface CustomerDetails {
   first_name: string;
@@ -68,7 +68,7 @@ interface AddOn {
   quantity_in_decimal?: string;
 }
 
-type EventBasedAddon = {
+export type EventBasedAddon = {
   id?: string;
   quantity?: number;
   unit_price?: number;
@@ -171,7 +171,7 @@ interface SetPaymentIntentOptions {
   adyen: object;
 }
 
-type CardInfo = {
+export type CardInfo = {
   number: string;
   expiryMonth: string;
   expiryYear: string;
@@ -180,7 +180,7 @@ type CardInfo = {
   lastName?: string;
 };
 
-type PaymentInfo = {
+export type PaymentInfo = {
   element?: any;
   card?: CardInfo;
   tokenizer?: Function;
@@ -202,20 +202,20 @@ interface ThreeDSHandler {
   getPaymentIntent(): PaymentIntent;
 }
 
-type PaymentCallbacks = {
+export type PaymentCallbacks = {
   change: Function;
   success: Function;
   error: Function;
 };
 
-type PaymentOptions = {
+export type PaymentOptions = {
   paymentIntent: Function;
   paymentInfo: PaymentInfo;
   callbacks: PaymentCallbacks;
   redirectMode: boolean;
 };
 
-type Subscription = {
+export type Subscription = {
   id?: string;
   plan_id: string;
   plan_quantity?: number;
@@ -225,7 +225,7 @@ type Subscription = {
   trial_end?: number;
 };
 
-type CommonSubscriptionEstimate = {
+export type CommonSubscriptionEstimate = {
   customer?: Customer;
   subscription?: Subscription;
 
@@ -243,11 +243,11 @@ type CommonSubscriptionEstimate = {
   mandatory_addons_to_remove?: Array<string>;
 };
 
-type CreateSubscriptionEstimate = CommonSubscriptionEstimate & {
+export type CreateSubscriptionEstimate = CommonSubscriptionEstimate & {
   client_profile_id?: string;
 };
 
-type UpdateSubscriptionEstimate = CommonSubscriptionEstimate & {
+export type UpdateSubscriptionEstimate = CommonSubscriptionEstimate & {
   replace_addon_list?: boolean;
   reactivate_from?: number;
   replace_coupon_list?: boolean;
@@ -259,7 +259,7 @@ type UpdateSubscriptionEstimate = CommonSubscriptionEstimate & {
   use_existing_balances?: boolean;
 };
 
-type SubscriptionRenewalEstimate = {
+export type SubscriptionRenewalEstimate = {
   id: string;
   subscription?: {
     id: string;
@@ -282,12 +282,12 @@ interface EstimatesFunctions {
   ): Promise<object> /** Resource object representing estimate */;
 }
 
-type VatValidationParams = {
+export type VatValidationParams = {
   country: string;
   vat_number: string;
 };
 
-type VatValidationResponse = {
+export type VatValidationResponse = {
   status: 'VALID' | 'INVALID' | 'UNDETERMINED';
   message: string;
 };
@@ -296,7 +296,7 @@ interface VatFunctions {
   validateVat(payload: VatValidationParams): VatValidationResponse;
 }
 
-type ChargebeeInstance = {
+export type ChargebeeInstance = {
   site: string;
   publishableKey: string;
   createComponent(
@@ -310,10 +310,7 @@ type ChargebeeInstance = {
   openCheckout(options: OpenCheckoutOptions): void;
   getCart(): Cart;
   getProduct(checkoutButtonElement: HTMLElement): Product;
-  initializeProduct(
-    planId: string,
-    planQuantity: number
-  ): Product;
+  initializeProduct(planId: string, planQuantity: number): Product;
   setCheckoutCallbacks(
     setterFunction: (cart: Cart) => SetCheckoutCallbacks
   ): void;
@@ -339,7 +336,7 @@ type ChargebeeInstance = {
   vat: VatFunctions;
 };
 
-type ChargebeeComponent = {
+export type ChargebeeComponent = {
   createField(
     fieldType: Card.ComponentFieldType,
     options: ComponentOptions
@@ -350,7 +347,7 @@ type ChargebeeComponent = {
   destroy(): Promise<void>;
 };
 
-type ComponentField = {
+export type ComponentField = {
   at(id: string): ComponentField;
   applyStyles(options: ComponentOptions): ComponentField;
   focus(): void;
@@ -360,7 +357,7 @@ type ComponentField = {
   // mount(): Promise<boolean>;
 };
 
-type ComponentOptions = {
+export type ComponentOptions = {
   [HostedFields.Options.classes]?: Classes;
   [HostedFields.Options.style]?: Styles;
   [HostedFields.Options.fonts]?: Fonts;
@@ -370,24 +367,24 @@ type ComponentOptions = {
   [HostedFields.Options.ariaLabel]?: AriaLabel | string;
 };
 
-type Classes = {
+export type Classes = {
   [HostedFields.CSSClass.focus]?: string;
   [HostedFields.CSSClass.empty]?: string;
   [HostedFields.CSSClass.invalid]?: string;
   [HostedFields.CSSClass.complete]?: string;
 };
 
-type StyleBlock = CSSStyleBlock & PseudoStyleBlock;
+export type StyleBlock = CSSStyleBlock & PseudoStyleBlock;
 
-type Styles = {
+export type Styles = {
   [HostedFields.StyleSections.base]: StyleBlock;
   [HostedFields.StyleSections.empty]: StyleBlock;
   [HostedFields.StyleSections.invalid]: StyleBlock;
 };
 
-type Fonts = Array<FontFace | FontURL>;
+export type Fonts = Array<FontFace | FontURL>;
 
-type FontFace = {
+export type FontFace = {
   fontFamily: string;
   src?: string;
   fontStyle?: string;
@@ -399,21 +396,21 @@ export type FieldConfiguration = {
   [HostedFields.FieldOption.show]?: boolean;
 };
 
-type Fields = {
+export type Fields = {
   [HostedFields.Field.number]?: FieldConfiguration;
   [HostedFields.Field.expiry]?: FieldConfiguration;
   [HostedFields.Field.cvv]?: FieldConfiguration;
 };
 
-type FontURL = string;
+export type FontURL = string;
 
-type Placeholder = {
+export type Placeholder = {
   [HostedFields.Placeholder.number]?: string;
   [HostedFields.Placeholder.expiry]?: string;
   [HostedFields.Placeholder.cvv]?: string;
 };
 
-type CSSStyleBlock = {
+export type CSSStyleBlock = {
   [HostedFields.CustomCSSProperty.iconColor]?: string;
 
   [HostedFields.StdCSSProperty.color]?: string;
@@ -435,7 +432,7 @@ type CSSStyleBlock = {
   [HostedFields.FontProperty.fontVariant]?: string;
 };
 
-type PseudoStyleBlock = {
+export type PseudoStyleBlock = {
   [HostedFields.PseudoCSSProperty.hover]?: CSSStyleBlock;
   [HostedFields.PseudoCSSProperty.focus]?: CSSStyleBlock;
   [HostedFields.PseudoCSSProperty.disabled]?: CSSStyleBlock;
@@ -445,19 +442,19 @@ type PseudoStyleBlock = {
   [HostedFields.PseudoCSSProperty.focusPlaceholder]?: CSSStyleBlock;
 };
 
-type AriaLabel = {
+export type AriaLabel = {
   [HostedFields.AriaLabel.number]?: string;
   [HostedFields.AriaLabel.expiry]?: string;
   [HostedFields.AriaLabel.cvv]?: string;
 };
 
-type PayerInfo = {
+export type PayerInfo = {
   customer?: Customer;
   shipping_address?: Address;
   billing_address?: Address;
 };
 
-type PaymentAttempt = {
+export type PaymentAttempt = {
   id: string;
   status: PaymentAttemptStatus;
   type: string;
@@ -508,19 +505,19 @@ export type AdditionalData = {
   mandate?: Mandate;
 };
 
-type Mandate = {
+export type Mandate = {
   requireMandate: boolean;
   description?: string;
 };
 
-type Customer = {
+export type Customer = {
   firstName?: string;
   lastName?: string;
   email?: string;
   phone?: string;
 };
 
-type Address = {
+export type Address = {
   firstName?: string;
   lastName?: string;
   phone?: string;
