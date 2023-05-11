@@ -15,7 +15,7 @@ import {
 } from './enums';
 
 export type Chargebee = {
-  init(op: InitOptions): void;
+  init(op: InitOptions): ChargebeeInstance;
   getInstance(): ChargebeeInstance;
 };
 
@@ -26,7 +26,7 @@ export type InitOptions = {
 
 export type OpenCheckoutOptions = {
   hostedPage: Function;
-  layout: Layout;
+  layout?: Layout;
   loaded: Function;
   error: Function;
   success(hostedPageId: string): void;
