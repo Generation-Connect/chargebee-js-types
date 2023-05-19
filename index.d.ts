@@ -150,7 +150,7 @@ interface PortalOpenSectionOptions {
 }
 
 interface Portal {
-  open(options: PortalCallbacks, forwardOptions: PortalForwardOptions): void;
+  open(options?: PortalCallbacks, forwardOptions?: PortalForwardOptions): void;
   openSection(
     options: PortalOpenSectionOptions,
     callbacks: PortalCallbacks
