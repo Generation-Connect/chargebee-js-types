@@ -118,20 +118,22 @@ interface Cart {
 }
 
 interface PortalCallbacks {
-  loaded: Function;
-  close: Function;
-  visit(sectionType: string): void;
-  paymentSourceAdd: Function;
-  paymentSourceUpdate: Function;
-  paymentSourceRemove: Function;
-  subscriptionChanged(data: { subscription: { id: string } }): void;
-  subscriptionCustomFieldsChanged(data: { subscription: { id: string } }): void;
-  subscriptionCancelled(data: { subscription: { id: string } }): void;
-  subscriptionResumed(data: { subscription: { id: string } }): void;
-  subscriptionPaused(data: { subscription: { id: string } }): void;
-  scheduledPauseRemoved(data: { subscription: { id: string } }): void;
-  scheduledCancellationRemoved(data: { subscription: { id: string } }): void;
-  subscriptionReactivated(data: { subscription: { id: string } }): void;
+  loaded?: Function;
+  close?: Function;
+  visit?(sectionType: string): void;
+  paymentSourceAdd?: Function;
+  paymentSourceUpdate?: Function;
+  paymentSourceRemove?: Function;
+  subscriptionChanged?(data: { subscription: { id: string } }): void;
+  subscriptionCustomFieldsChanged?(data: {
+    subscription: { id: string };
+  }): void;
+  subscriptionCancelled?(data: { subscription: { id: string } }): void;
+  subscriptionResumed?(data: { subscription: { id: string } }): void;
+  subscriptionPaused?(data: { subscription: { id: string } }): void;
+  scheduledPauseRemoved?(data: { subscription: { id: string } }): void;
+  scheduledCancellationRemoved?(data: { subscription: { id: string } }): void;
+  subscriptionReactivated?(data: { subscription: { id: string } }): void;
 }
 
 interface PortalForwardOptions {
